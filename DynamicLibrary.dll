@@ -1,0 +1,33 @@
+//Author: Mauricio Cortés
+//ID: A00816689
+//Date: 13/10/2016
+//Dynamic and static libraries
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+#define DllExport __declspec(dllexport)
+
+//Reads a string and stops when it reads a "."
+DllExport void LargeString()
+{
+    char cLetter;
+    int iIterator = 0;
+    char * cWord = malloc(sizeof(char));
+    cWord[0] = '\0';
+    while((cLetter = getch())!='.')
+    {
+        printf("%c", cLetter);//printing every letter
+        cWord = realloc(cWord, (iIterator+2)*sizeof(char));
+        cWord[iIterator++] = cLetter;
+        cWord[iIterator] = '\0';
+    }
+    printf("The word is: %s\n", cWord);
+    free(cWord);
+}
+
+int main()
+{
+    LargeString();
+    return 0;
+}
